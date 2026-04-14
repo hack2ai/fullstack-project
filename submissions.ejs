@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="page-wrap">
+    <header>
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span>EduPortal</span>
+      </div>
+      <nav>
+        <a href="/">Register</a>
+        <a href="/submissions" class="active">View Submissions</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Flask Backend Data</p>
+        <h1>All<br /><em>Submissions</em></h1>
+        <p class="subtitle">
+          <%= data.count %> record<%= data.count !== 1 ? 's' : '' %> retrieved from the Flask backend.
+        </p>
+      </section>
+
+      <% if (data.error) { %>
+        <div class="alert alert-error"><%= data.error %></div>
+      <% } %>
+
+      <% if (data.submissions && data.submissions.length > 0) { %>
+        <div class="table-card">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Course</th>
+                <th>Year</th>
+                <th>Submitted At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% data.submissions.forEach(s => { %>
+                <tr>
+                  <td class="id-cell"><%= s.id %></td>
+                  <td><strong><%= s.name %></strong></td>
+                  <td class="email-cell"><%= s.email %></td>
+                  <td><%= s.course %></td>
+                  <td>Year <%= s.year %></td>
+                  <td class="date-cell"><%= new Date(s.timestamp).toLocaleString() %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } else if (!data.error) { %>
+        <div class="empty-state">
+          <div class="empty-icon">📋</div>
+          <p>No submissions yet. <a href="/">Be the first to register!</a></p>
+        </div>
+      <% } %>
+    </main>
+
+    <footer>
+      <p>Node.js + Express &nbsp;→&nbsp; Flask Backend &nbsp;·&nbsp; Docker Compose</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="page-wrap">
+    <header>
+      <div class="logo">
+        <span class="logo-dot"></span>
+        <span>EduPortal</span>
+      </div>
+      <nav>
+        <a href="/">Register</a>
+        <a href="/submissions">View Submissions</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Academic Year 2024–25</p>
+        <h1>Student<br /><em>Registration</em></h1>
+        <p class="subtitle">
+          Fill out the form below and your details will be processed<br />
+          securely by our Flask backend.
+        </p>
+      </section>
+
+      <div class="form-card">
+        <% if (success) { %>
+          <div class="alert alert-success">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <%= success %>
+          </div>
+        <% } %>
+        <% if (error) { %>
+          <div class="alert alert-error">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            <%= error %>
+          </div>
+        <% } %>
+
+        <form action="/submit" method="POST" novalidate>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+            </div>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@university.edu" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="course">Course / Program</label>
+              <select id="course" name="course" required>
+                <option value="" disabled selected>Select your course</option>
+                <option value="btech-cs">B.Tech – Computer Science</option>
+                <option value="btech-it">B.Tech – Information Technology</option>
+                <option value="btech-ec">B.Tech – Electronics &amp; Communication</option>
+                <option value="mtech-cs">M.Tech – Computer Science</option>
+                <option value="mca">MCA – Master of Computer Applications</option>
+                <option value="bsc-cs">B.Sc – Computer Science</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="year">Year of Study</label>
+              <select id="year" name="year" required>
+                <option value="" disabled selected>Select year</option>
+                <option value="1">1st Year</option>
+                <option value="2">2nd Year</option>
+                <option value="3">3rd Year</option>
+                <option value="4">4th Year</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="message">Message / Note <span class="optional">(optional)</span></label>
+            <textarea id="message" name="message" rows="4" placeholder="Any additional information or queries..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <span>Submit Registration</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <p>Node.js + Express &nbsp;→&nbsp; Flask Backend &nbsp;·&nbsp; Docker Compose</p>
+    </footer>
+  </div>
+</body>
+</html>
